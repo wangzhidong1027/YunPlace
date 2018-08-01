@@ -1,0 +1,85 @@
+@keyframes error500animation {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    20% {
+        transform: rotateZ(-10deg);
+    }
+    40% {
+        transform: rotateZ(5deg);
+    }
+    60% {
+        transform: rotateZ(-5deg);
+    }
+    80% {
+        transform: rotateZ(10deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+.error500{
+     width: 100%;
+      height: 100%;
+    .error500-body-con{
+      width: 100%;
+      height: 100%;
+        .error500-body-con-title{
+            text-align: center;
+            font-size: 100px;
+            font-weight: 700;
+            color: #2d8cf0;
+            height: 260px;
+            line-height: 260px;
+            margin-top: 40px;
+            .error500-0-span{
+                display: inline-block;
+                position: relative;
+                color: #ed3f14;
+                margin-right: 10px;
+                width: 50px;
+                height: 50px;
+                border:12px solid #ed3f14;
+                border-radius: 50%;
+                margin-right:5px;
+               i{
+                    display: inline-block;
+                    line-height: 50px;
+                    position: absolute;
+                    bottom: -10px;
+                    left: 10px;
+                    transform-origin: center bottom;
+                    animation: error500animation 3s ease 0s infinite alternate;
+                }
+            }
+        }
+        &-message{
+            display: block;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: #dddde2;
+        }
+    }
+    &-btn-con{
+        text-align: center;
+        padding: 20px 0;
+        margin-bottom: 40px;
+      button{
+        width: 90px;
+        height: 40px;
+        border: none;
+      }
+      .home{
+        color: #495060;
+        background-color: transparent;
+      }
+      .up-page{
+        color: #fff;
+        background-color: #2d8cf0;
+        border-color: #2d8cf0;
+        border-radius: 2px;
+      }
+    }
+}
