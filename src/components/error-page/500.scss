@@ -31,7 +31,6 @@
             color: #2d8cf0;
             height: 260px;
             line-height: 260px;
-            margin-top: 40px;
             .error500-0-span{
                 display: inline-block;
                 position: relative;
@@ -43,13 +42,14 @@
                 border-radius: 50%;
                 margin-right:5px;
                i{
-                    display: inline-block;
-                    line-height: 50px;
-                    position: absolute;
-                    bottom: -10px;
-                    left: 10px;
-                    transform-origin: center bottom;
-                    animation: error500animation 3s ease 0s infinite alternate;
+                  display: inline-block;
+                  line-height: 50px;
+                  position: absolute;
+                  bottom: -10px;
+                  left: 10px;
+                  font-size: 34px;
+                  transform-origin: center bottom;
+                  animation: error500animation 3s ease 0s infinite alternate;
                 }
             }
         }

@@ -8,6 +8,8 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 input, select,textarea {border: 0;-webkit-appearance: none;appearance:none;outline:none;}//清除输入框内阴影
 
 img,a{-webkit-touch-callout:none;}//禁用长按页面时的弹出菜单(iOS下有效)
+//img:not([activwe]){opacity:0}
+
 em,i{font-style:normal;}
 a{text-decoration:none;-webkit-touch-callout:none;background-color:transparent}
 a:active,a:hover{outline:none}
