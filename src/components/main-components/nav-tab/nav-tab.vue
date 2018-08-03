@@ -17,7 +17,7 @@ export default {
       nav: [
         {name: '首页', link: '#/home', img: require('../../../assets/images/home_pagey.png'), nosel: require('../../../assets/images/home_pagen.png'), key: 1},
         {name: '兑换码', link: '#/404', img: require('../../../assets/images/redeem_code.png'), nosel: require('../../../assets/images/redeem_code.png'), key: 2},
-        {name: '我的欣享', link: '#/500', img: require('../../../assets/images/I_enjoy_ity.png'), nosel: require('../../../assets/images/I_enjoy_itn.png'), key: 3}
+        {name: '我的欣享', link: '#/me', img: require('../../../assets/images/I_enjoy_ity.png'), nosel: require('../../../assets/images/I_enjoy_itn.png'), key: 3}
       ],
       selected: ''
     }
@@ -36,13 +36,26 @@ export default {
 <style lang="scss">
 .my-navtab{
   display: flex;
-  right: 0;
+  position: fixed;
+  width: 100%;
   bottom: 0;
   left: 0;
-  position: absolute;
   background: #fff;
   font-size: 0.01rem;
   color: #333333;
+  height: 51px;
+  box-shadow: 0 -15px 15px #f8fafc;
+  &:after{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #eeeeee;
+    transform-origin: 0 0;
+    transform: scaleY(0.5);
+  }
   .mint-tabbar{
     background: #fff;
   }

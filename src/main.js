@@ -6,7 +6,6 @@ import router from './router'
 
 import MintUi from 'mint-ui'
 import 'mint-ui/lib/style.css'
-
 import Axios from 'axios'
 
 // 获取屏幕宽度 设置HTML的font-size

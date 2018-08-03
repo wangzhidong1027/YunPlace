@@ -11,11 +11,12 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './assets/reset';
-  html,body,#app{
-    width: 100%;
-    height: 100%;
-  }
+@import './assets/reset';
+@import './assets/style/1px.scss';
+html,body,#app{
+  width: 100%;
+  height: 100%;
+}
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

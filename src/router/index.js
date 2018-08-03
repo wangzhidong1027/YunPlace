@@ -16,6 +16,16 @@ export default new Router({
       component: Home
     },
     {
+      path: '/me',
+      name: 'Me',
+      component: () => import('@/components/me.vue')
+    },
+    {
+      path: '/orderdetail',
+      name: 'OrderDetail',
+      component: () => import('@/components/order-detail.vue')
+    },
+    {
       path: '/404',
       name: 'Error404',
       component: () => import('@/components/error-page/404.vue')
