@@ -14,16 +14,16 @@
               <aside>中国石化</aside>
             </a>
             <a href="">
-             <img src="../assets/images/petrifaction.png" alt="">
-              <aside>中国石化</aside>
+             <img src="../assets/images/petroleum.png" alt="">
+              <aside>中国石油</aside>
             </a>
              <a href="">
-             <img src="../assets/images/petrifaction.png" alt="">
-              <aside>中国石化</aside>
+             <img src="../assets/images/telephone_charges.png" alt="">
+              <aside>话费充值</aside>
             </a>
              <a href="">
-             <img src="../assets/images/petrifaction.png" alt="">
-              <aside>中国石化</aside>
+             <img src="../assets/images/expect.png" alt="">
+              <aside>敬请期待</aside>
             </a>
           </nav>
       </div>
@@ -64,7 +64,7 @@ export default {
       height: 100%;
       overflow: scroll;
       box-sizing: border-box;
-      padding-bottom: .5rem;
+      padding-bottom: .7rem;
       overflow: scroll;
       .swiper {
         width: 100%;

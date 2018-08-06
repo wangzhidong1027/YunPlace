@@ -21,6 +21,7 @@ export default {
   bottom: .57rem;
   margin-left: -4.5rem;
   animation: arch 3s linear infinite;
+  z-index: -10;
 }
 @keyframes arch {
   0%{transform:rotate(0deg);}
@@ -28,4 +29,3 @@ export default {
   100% {transform:rotate(360deg);}
 }
 </style>
-

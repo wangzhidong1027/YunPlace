@@ -8,12 +8,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: { name: 'Home' }
+      redirect: { name: 'Error404' }
     },
     {
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/exchange',
+      name: 'ExChange',
+      component: () => import('@/components/exchange.vue')
     },
     {
       path: '/me',

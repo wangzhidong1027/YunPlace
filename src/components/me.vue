@@ -1,27 +1,47 @@
 <template>
   <div id="me">
     <div class="me-content">
-      <header class="border-1px-b">
-        <div class="user-info">
-          <div class="info-content">
-            <div class="use-img"></div>
-            <div class="user-id">18738302838</div>
-            <a class="exchange">激活兑换码</a>
-          </div>
-          <div class="user-data">
-            <div class="outside left-box">
-              <div class="number">1000</div>
-              <div class="my-number">我的欣豆</div>
+      <!--<header class="border-1px-b">-->
+        <!--<div class="user-info">-->
+          <!--<div class="info-content">-->
+            <!--<div class="use-img"></div>-->
+            <!--<div class="user-id">18738302838</div>-->
+            <!--<a class="exchange">激活兑换码</a>-->
+          <!--</div>-->
+          <!--<div class="user-data">-->
+            <!--<div class="outside left-box">-->
+              <!--<div class="number">1000</div>-->
+              <!--<div class="my-number">我的欣豆</div>-->
+            <!--</div>-->
+            <!--<div class="outside">-->
+              <!--<div class="number">2</div>-->
+              <!--<div class="my-number">我的订单</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</header>-->
+      <div class="my-arch border-1px-b">
+        <arch></arch>
+        <div class="my-info" ref="box">
+            <canvas ref='canvas'></canvas>
+           <div class="arch-info">
+            <div class="info-content">
+              <div class="use-img"></div>
+              <div class="user-id">18738302838</div>
+              <a class="exchange">激活兑换码</a>
             </div>
-            <div class="outside">
-              <div class="number">2</div>
-              <div class="my-number">我的订单</div>
+            <div class="user-data">
+              <div class="outside left-box">
+                <div class="number">1000</div>
+                <div class="my-number">我的欣豆</div>
+              </div>
+              <div class="outside">
+                <div class="number">2</div>
+                <div class="my-number">我的订单</div>
+              </div>
             </div>
           </div>
         </div>
-      </header>
-      <div class="my-arch border-1px-b">
-        <arch></arch>
       </div>
       <div class="me-nav">
         <ul>
@@ -77,7 +97,62 @@ export default {
     Arch
   },
   data () {
-    return {}
+    return {
+      canvas: '',
+      canvasWidth: '',
+      canvasHeight: '',
+      xOffset: 0,
+      speed: 0.02
+    }
+  },
+  methods: {
+    drawSin (xOffset) {
+      const ctx = this.canvas.getContext('2d')
+      var mygradient = ctx.createLinearGradient(0, 0, 0, this.canvasHeight)
+      mygradient.addColorStop(0, 'rgba(255, 247, 247, 0.2)')
+      mygradient.addColorStop(1, 'rgba(255, 230, 230, 0.6)')
+      ctx.fillStyle = mygradient
+      const points = []
+      const canvasWidth = this.canvasWidth
+      const canvasHeight = this.canvasHeight
+      const startX = 0
+      const waveWidth = 0.028 // 波浪宽度,数越小越宽
+      const waveHeight = 15 // 波浪高度,数越大越高
+      // const xOffset = 10 // 水平位移
+      ctx.beginPath()
+      for (let x = startX; x < startX + canvasWidth; x += 20 / canvasWidth) {
+        const y = waveHeight * Math.sin((startX + x) * waveWidth + xOffset)
+        points.push([x, (canvasHeight / 1.5) + y])
+        ctx.lineTo(x, (canvasHeight / 1.5) + y)
+      }
+      ctx.lineTo(canvasWidth, canvasHeight)
+      ctx.lineTo(startX, canvasHeight)
+      ctx.lineTo(points[0][0], points[0][1])
+      ctx.fill()
+    },
+    draw () {
+      const canvas = this.canvas
+      const ctx = canvas.getContext('2d')
+      ctx.fillStyle = '#fff7f7'
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      // 曲线绘制
+      this.drawSin(this.xOffset)
+      this.drawSin(this.xOffset + 2.5)
+      this.xOffset += this.speed
+      requestAnimationFrame(this.draw.bind(this))
+    }
+  },
+  mounted () {
+    var box = this.$refs.box
+    var canvas = this.$refs.canvas
+    this.canvas = canvas
+    this.canvasWidth = box.offsetWidth
+    this.canvasHeight = box.offsetHeight
+    this.canvas.width = box.offsetWidth
+    this.canvas.height = box.offsetHeight
+    this.canvas.style = 'position: absolute; left:.15rem; top:.25rem;z-index:10;border-radius: 8px;'
+    this.xOffset += this.speed
+    requestAnimationFrame(this.draw.bind(this))
   }
 }
 </script>
@@ -93,7 +168,7 @@ export default {
       height: 100%;
       overflow: scroll;
       /*flex: 1;*/
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.6rem;
       box-sizing: border-box;
       header {
         height: 2.28rem;
@@ -150,6 +225,7 @@ export default {
             overflow: hidden;
             .left-box {
               border-right: 1px solid #ffd7d7;
+              border-radius: 8px;
             }
             .outside {
               width: 50%;
