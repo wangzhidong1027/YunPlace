@@ -6,7 +6,7 @@
     <!--<div class="order-state state-lose"><i></i><span>已取消</span></div>-->
     <div class="order-content border-1px-b">
       <div class="img-box">
-        <img src="../assets/goods.png" alt="">
+        <img src="../../assets/goods.png" alt="">
       </div>
       <div class="goods-info">
         <p class="name">话费直充</p>
@@ -60,11 +60,11 @@ export default {
       }
     }
     .state-succeed{
-      background: url("../assets/images/ok.png") no-repeat left top;
+      background: url("../../assets/images/ok.png") no-repeat left top;
       background-size: 100% 100%;
     }
     .state-lose{
-      background: url("../assets/images/cel.png") no-repeat left top;
+      background: url("../../assets/images/cel.png") no-repeat left top;
       background-size: 100% 100%;
     }
     .order-content{

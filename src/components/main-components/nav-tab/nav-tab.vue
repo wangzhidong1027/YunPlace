@@ -16,7 +16,7 @@ export default {
     return {
       nav: [
         {name: '首页', link: '#/home', img: require('../../../assets/images/home_pagey.png'), nosel: require('../../../assets/images/home_pagen.png'), key: 1},
-        {name: '兑换码', link: '#/exchange', img: require('../../../assets/images/redeem_code.png'), nosel: require('../../../assets/images/redeem_code.png'), key: 2},
+        {name: '兑换码', link: '#/activated', img: require('../../../assets/images/redeem_code.png'), nosel: require('../../../assets/images/redeem_code.png'), key: 2},
         {name: '我的欣享', link: '#/me', img: require('../../../assets/images/I_enjoy_ity.png'), nosel: require('../../../assets/images/I_enjoy_itn.png'), key: 3}
       ],
       selected: ''
