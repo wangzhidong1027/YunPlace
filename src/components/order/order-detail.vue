@@ -6,18 +6,18 @@
     <!--<div class="order-state state-lose"><i></i><span>已取消</span></div>-->
     <div class="order-content border-1px-b">
       <div class="img-box">
-        <img src="../../assets/goods.png" alt="">
+        <img :src="info.image" alt="">
       </div>
       <div class="goods-info">
-        <p class="name">话费直充</p>
-        <div class="goode-detail"><span class="money">￥200.00</span><span class="count">×1</span></div>
+        <p class="name">{{info.typeName}}</p>
+        <div class="goode-detail"><span class="money">￥{{info.totalMoney}}</span><span class="count">×{{info.amount}}</span></div>
       </div>
     </div>
     <div class="order-info border-1px-b">
-      <p><span>订单编号: </span><span>14490359969978</span></p>
-      <p><span>下单时间: </span><span>2017-08-21 09:20:35</span></p>
-      <p><span>支付时间: </span><span>2017-12-07 09:20:35</span></p>
-      <p><span>完成时间: </span><span>2017-12-07 09:20:35</span></p>
+      <p><span>订单编号: </span><span>{{info.orderNo}}</span></p>
+      <p><span>下单时间: </span><span>{{info.addtime}}</span></p>
+      <p v-if="info.status !== '0'"><span>支付时间: </span><span>{{info.totalMoney}}</span></p>
+      <!--<p><span>完成时间: </span><span>2017-12-07 09:20:35</span></p>-->
     </div>
     <div class="order-info border-1px-b">
       <p><span>订单类型: </span><b>话费充值</b></p>
@@ -32,7 +32,36 @@
 
 <script>
 export default {
-  name: 'OrderDetail'
+  name: 'OrderDetail',
+  data () {
+    return {
+      isshow: false,
+      data: {
+        orderNo: ''
+      },
+      info: {}
+    }
+  },
+  created () {
+    this.data.orderNo = this.$route.params.orderNo
+    this.$indicator.open({spinnerType: 'fading-circle'})
+    this.$axios.post(
+      this.$api.orderinfoApi,
+      this.$qs.stringify({
+        data: this.$base64.encode(JSON.stringify(this.data))
+      })
+    ).then(result => {
+      this.$indicator.close()
+      var res = JSON.parse(this.$base64.decode(result.data))
+      if (res.code === '10000') {
+        this.info = res.data
+      } else {
+        this.$toast(res.info)
+      }
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 }
 </script>
 

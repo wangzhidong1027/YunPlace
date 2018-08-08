@@ -3,9 +3,9 @@
     <div class="oil">
         <div class="input-box">
           <div class="input-item border-1px-b">
-            <mt-field placeholder="请输入手机号" type="tel" v-model="tel"  :attr="{ maxlength: 11 }"  @input.native.capture="getSupplier">
+            <mt-field placeholder="请输入手机号" type="tel" v-model="tel"  :attr="{ maxlength: 11 }"  @keyup.native.capture="getSupplier">
             </mt-field>
-            <div class="supplier border-1px-l">北京移动</div>
+            <div v-if="carrier" class="supplier border-1px-l">{{carrier}}</div>
           </div>
            <div class="input-item">
             <mt-field placeholder="请输入手机号" type="tel" v-model="tel"  :attr="{ maxlength: 11 }">
@@ -27,16 +27,29 @@
 </template>
 
 <script>
+import Jsonp from 'jsonp'
 export default {
   name: 'Phone',
   data () {
     return {
-      tel: ''
+      tel: '',
+      carrier: ''
     }
   },
   methods: {
     getSupplier () {
-
+      if (this.$utils.checkType.check(this.tel, 'mobile')) {
+        Jsonp('https://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=18738302838', null, (err, data) => {
+          if (err) {
+            // this.$toast('获取归属失败')
+            // console.error(err.message)
+          } else {
+            this.carrier = data.carrier
+          }
+        })
+      } else {
+        this.carrier = ''
+      }
     }
   }
 }

@@ -10,8 +10,13 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
+    proxyTable: {
+       '/market-api': {
+          type: 'proxy',
+          changeOrigin: true, //改变源
+          target: 'http://10.10.18.16:8082/',
+        }
+    },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined

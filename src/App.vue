@@ -36,11 +36,9 @@ html,body,#app{
   width: 100%;
   height: 100%;
 }
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  font-size: 16px;
 }
-
 .Router {
  position: absolute;
  width: 100%;

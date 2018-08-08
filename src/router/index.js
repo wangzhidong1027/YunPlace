@@ -44,7 +44,7 @@ export default new Router({
       component: () => import('@/components/order.vue'),
       children: [
         {
-          path: '/order/detail',
+          path: '/order/detail/:orderNo',
           name: 'OrderDetail',
           component: () => import('@/components/order/order-detail.vue')
         },
