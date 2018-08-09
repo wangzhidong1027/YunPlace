@@ -1,31 +1,36 @@
 <template>
-  <div id="order-detail">
-    <div class="order-state state-succeed">
-      <i></i><b>处理中</b>
-    </div>
-    <!--<div class="order-state state-lose"><i></i><span>已取消</span></div>-->
-    <div class="order-content border-1px-b">
-      <div class="img-box">
-        <img :src="info.image" alt="">
+  <div id="order-detail" v-show="show">
+    <div class="infobox">
+      <div class="order-state state-succeed" v-if="info.status !==3">
+        <i></i><b>{{statusType(info.status)}}</b>
       </div>
-      <div class="goods-info">
-        <p class="name">{{info.typeName}}</p>
-        <div class="goode-detail"><span class="money">￥{{info.totalMoney}}</span><span class="count">×{{info.amount}}</span></div>
+      <div class="order-state state-lose" v-if="info.status ===3"><i></i><span>已取消</span></div>
+      <div class="order-content border-1px-b">
+        <div class="img-box">
+          <img :src="info.image" alt="">
+        </div>
+        <div class="goods-info">
+          <p class="name">{{info.typeName}}</p>
+          <div class="goode-detail"><span class="money">￥{{info.totalMoney}}</span><span class="count">×{{info.amount}}</span></div>
+        </div>
       </div>
-    </div>
-    <div class="order-info border-1px-b">
-      <p><span>订单编号: </span><span>{{info.orderNo}}</span></p>
-      <p><span>下单时间: </span><span>{{info.addtime}}</span></p>
-      <p v-if="info.status !== '0'"><span>支付时间: </span><span>{{info.totalMoney}}</span></p>
-      <!--<p><span>完成时间: </span><span>2017-12-07 09:20:35</span></p>-->
-    </div>
-    <div class="order-info border-1px-b">
-      <p><span>订单类型: </span><b>话费充值</b></p>
-      <p><span>充值号码: </span><b>13812459658</b></p>
-      <p><span>支付方式: </span><b>欣豆支付</b></p>
-    </div>
-    <div class="amount border-1px-b">
-        <b>实付金额： </b><span>￥200.00</span>
+      <div class="order-info border-1px-b">
+        <p><span>订单编号: </span><span>{{info.orderNo}}</span></p>
+        <p><span>下单时间: </span><span>{{info.addtime}}</span></p>
+        <p v-if="info.status !== '0'"><span>支付时间: </span><span>{{info.totalMoney}}</span></p>
+        <!--<p><span>完成时间: </span><span>2017-12-07 09:20:35</span></p>-->
+      </div>
+      <div class="order-info border-1px-b">
+        <p><span>订单类型: </span><b>{{info.typeName}}</b></p>
+        <p><span>充值号码: </span><b>{{info.chargeNo}}</b></p>
+        <p><span>支付方式: </span><b>欣豆支付</b></p>
+      </div>
+      <div class="amount border-1px-b">
+          <b>实付欣豆： </b><span>{{info.totalDou}}</span>
+      </div>
+      </div>
+    <div class="btn-box border-1px-t border-1px-b" v-if="info.status===0">
+      <a :href="'#/order/pay/'+data.orderNo">立即付款</a> <button class="border-1px">取消订单</button>
     </div>
   </div>
 </template>
@@ -39,7 +44,8 @@ export default {
       data: {
         orderNo: ''
       },
-      info: {}
+      info: {},
+      show: false
     }
   },
   created () {
@@ -55,12 +61,31 @@ export default {
       var res = JSON.parse(this.$base64.decode(result.data))
       if (res.code === '10000') {
         this.info = res.data
+        this.show = true
       } else {
         this.$toast(res.info)
       }
     }).catch(error => {
       console.log(error)
     })
+  },
+  methods: {
+    statusType (state) {
+      switch (state) {
+        case 0:
+          return '待支付'
+        case 1:
+          return '已支付'
+        case 2:
+          return '支付失败'
+        case 3:
+          return '已取消'
+        case 4:
+          return '申请退款 '
+        case 5:
+          return '已退款'
+      }
+    }
   }
 }
 </script>
@@ -71,6 +96,42 @@ export default {
     width: 100%;
     overflow: scroll;
     background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    .infobox{
+      flex: 1;
+    }
+    .btn-box{
+      background: #fff;
+      height: 0.5rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 0.15rem;
+      a{
+        display: inline-block;
+        width: 0.82rem;
+        color: #fff;
+        background: #ff3b3d;
+        border-radius: 4px;
+        line-height: 0.37rem;
+        text-align: center;
+        font-size: 0.13rem;
+        height: 0.37rem;
+        margin-right: 10px;
+      }
+      button{
+        border: none;
+        display: inline-block;
+        width: 0.82rem;
+        color: #333;
+        background: #fff;
+        border-radius: 4px;
+        line-height: 0.37rem;
+        font-size: 0.13rem;
+        text-align: center;
+      }
+    }
     .order-state{
       width: 100%;
       box-sizing: border-box;

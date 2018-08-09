@@ -37,6 +37,16 @@ export default new Router({
       name: 'ExChange',
       component: () => import('@/components/me/exchange.vue')
     },
+    {
+      path: '/peas',
+      name: 'Peas',
+      component: () => import('@/components/me/peas.vue')
+    },
+    {
+      path: '/setphone',
+      name: 'Setphone',
+      component: () => import('@/components/me/setphone.vue')
+    },
     // order
     {
       path: '/order',

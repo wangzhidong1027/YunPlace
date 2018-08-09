@@ -11,32 +11,35 @@
           :bottom-method="loadBottom"
           :autoFill='false'
           ref="loadmore"
+          :allLoaded="allLoaded"
           bottomPullText=""
           bottomDropText="↓ 释放加载更多"
           :bottomDistance="70"
           @bottom-status-change="change">
         <ul>
           <li class="order-item border-1px-b border-1px-t" v-for="orderItem in orderArr" :key="orderItem.id">
-            <div class="order-header">
-              <span class="order-name">{{orderItem.typeName}}</span>
-              <span class="order-state">{{StateType(orderItem.status)}}</span>
-            </div>
-            <div class="goods-info">
-              <div class="img">
-                <img v-lazy.container="orderItem.image" alt="">
+            <a :href="'order/detail/'+ orderItem.orderNo">
+              <div class="order-header">
+                <span class="order-name">{{orderItem.typeName}}</span>
+                <span class="order-state">{{StateType(orderItem.status)}}</span>
               </div>
-              <div class="order-info">
-                <div class="order-no">
-                   <p>时间：<span>{{orderItem.addtime}}</span></p>
-                    <p>订单： <span>{{orderItem.orderNo}}</span></p>
+              <div class="goods-info">
+                <div class="img">
+                  <img v-lazy.container="orderItem.image" alt="">
                 </div>
-                <div class="count">数量：{{orderItem.amount}}</div>
+                <div class="order-info">
+                  <div class="order-no">
+                     <p>时间：<span>{{orderItem.addtime}}</span></p>
+                      <p>订单： <span>{{orderItem.orderNo}}</span></p>
+                  </div>
+                  <div class="count">数量：{{orderItem.amount}}</div>
+                </div>
               </div>
-            </div>
-            <p class="order-money border-1px-b"><span>总计： <b>￥{{orderItem.totalMoney}}</b></span></p>
+            </a>
+            <p class="order-money border-1px-b"><span>总计： <b>{{orderItem.totalDou}}</b></span></p>
             <div class="btn" v-if="orderItem.status === 0">
               <button class="border-1px"> 取消订单</button>
-              <a  href="">付款</a>
+              <a  :href="'order/pay/'+ orderItem.orderNo">付款</a>
             </div>
           </li>
           <p class="ismore" v-show="bottomStatus === 'pull'">{{mytext}}</p>
@@ -197,7 +200,6 @@ export default {
     .order-item{
       background: #fff;
       margin-top: 0.1rem;
-      overflow: scroll;
       .order-header{
         font-size: 0.14rem;
         line-height: 0.4rem;

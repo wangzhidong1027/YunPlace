@@ -1,16 +1,27 @@
 <template>
   <div id="activated">
     <div class="activated-list">
-      <div class="activated-item">
-        <div class="left">欣券</div>
-        <div class="right">
-          <p class="time">2017-12-02 13:59:45</p>
-          <p class="code">fsdfasdfasd12312312sd</p>
-          <div class="money">
-              ￥<span>1000.00</span>
+      <mt-loadmore
+          :bottom-method="loadBottom"
+          :autoFill='false'
+          ref="loadmore"
+          :allLoaded="allLoaded"
+          bottomPullText="↑ 上拉获取更多"
+          bottomDropText="↓ 释放加载更多"
+          :bottomDistance="70">
+        <div>
+          <div class="activated-item" v-for="coupItem in coupArr" :key="coupItem.id">
+            <div class="left">欣券</div>
+            <div class="right">
+              <p class="time">{{coupItem.expireTime}}</p>
+              <p class="code">{{coupItem.activeCode}}</p>
+              <div class="money">
+                  ￥<span>{{coupItem.money}}</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </mt-loadmore>
     </div>
     <div class="tab-bar">
       <a href="#/home">商城首页</a><span></span>
@@ -22,7 +33,64 @@
 
 <script>
 export default {
-  name: 'Activated'
+  name: 'Activated',
+  data () {
+    return {
+      coupArr: [],
+      data: {
+        pageNo: '1',
+        pageSize: 6
+      },
+      allLoaded: false
+    }
+  },
+  methods: {
+    init () {
+      this.$axios.post(
+        this.$axios.post(
+          this.$api.couponlistApi,
+          this.$qs.stringify({
+            data: this.$base64.encode(JSON.stringify(this.data))
+          })
+        ).then(result => {
+          var res = JSON.parse(this.$base64.decode(result.data))
+          if (res.code === '10000') {
+            this.coupArr = this.res.data
+            if (res.data.length !== 6) {
+              this.allLoaded = true
+            }
+          } else {
+            this.$toast(res.info)
+            this.allLoaded = true
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      )
+    },
+    loadBottom () {
+      this.$axios.post(
+        this.$axios.post(
+          this.$api.couponlistApi,
+          this.$qs.stringify({
+            data: this.$base64.encode(JSON.stringify(this.data))
+          })
+        ).then(result => {
+          var res = JSON.parse(this.$base64.decode(result.data))
+          if (res.code === '10000') {
+            this.coupArr = this.coupArr.concat(this.res.data)
+            if (res.data.length !== 6) {
+
+            }
+          } else {
+            this.$toast(res.info)
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      )
+    }
+  }
 }
 </script>
 
