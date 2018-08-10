@@ -23,7 +23,7 @@ export default new Router({
       name: 'Rechange',
       component: () => import('@/components/rechange.vue'),
       children: [
-        {path: '/rechange/oilcard', name: 'OilCard', component: () => import('@/components/rechange/oil-card.vue')},
+        {path: '/rechange/oilcard/:id', name: 'OilCard', component: () => import('@/components/rechange/oil-card.vue')},
         {path: '/rechange/phone', name: 'Phone', component: () => import('@/components/rechange/phone.vue')}
       ]
     },

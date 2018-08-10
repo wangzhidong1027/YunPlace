@@ -9,19 +9,19 @@
       </div>
       <div class="nav">
           <nav>
-            <a href="">
+            <a href="#/rechange/oilcard/1">
               <img src="../assets/images/petrifaction.png" alt="">
               <aside>中国石化</aside>
             </a>
-            <a href="">
+            <a href="#/rechange/oilcard/2">
              <img src="../assets/images/petroleum.png" alt="">
               <aside>中国石油</aside>
             </a>
-             <a href="">
+             <a href="#/rechange/phone">
              <img src="../assets/images/telephone_charges.png" alt="">
               <aside>话费充值</aside>
             </a>
-             <a href="">
+             <a href="#/home">
              <img src="../assets/images/expect.png" alt="">
               <aside>敬请期待</aside>
             </a>
